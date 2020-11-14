@@ -1,0 +1,55 @@
+h1{
+    font-family: 'Century Gothic',sans-serif;
+    font-size: 4rem;
+    letter-spacing: 4px;
+    font-weight: 400;
+    color: white;
+}
+
+.landing{
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+
+  .container{
+    color:white;
+    width: 25vw;
+    height: 30vw;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: double;
+    background: rgba(0, 0, 0, 0.3);
+    margin: 0 30px;
+    border-radius: 15px;
+    transition: padding 0.5s, background 0.5s, color 0.5s;
+  }
+
+  .container:hover{
+    color: white;
+    background: teal;
+    padding: 1em 1em;
+  }
+
+  a.button {
+    background: white;
+    text-decoration: none;
+    color: black;
+    border: 2px double teal;
+    padding: .75em 2em;
+    text-align: center;
+    width: max-content;
+    border-radius: 15px;
+    transition: padding 0.5s, background 0.5s, color 0.5s;
+  }
+
+  
