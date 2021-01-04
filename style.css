@@ -51,9 +51,46 @@ h1{
     border-radius: 15px;
     transition: padding 0.5s, background 0.5s, color 0.5s;
   }
-  a
-  {
+  a{
     text-decoration: none; 
   }
+  
+  form{
+    color:white;
+    border: double;
+    background: rgba(0, 0, 0, 0.3);
+    margin: 0 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  form input{
+    font-size: 30px;
+    width: 90%;
+    padding: 10px;
+    margin: 8px;
+    background: #f5f5f5;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
 
+  }
+
+  form button{
+    font-size: 30px;
+    background: #677eff;
+    color: #fff;
+    width: 50%;
+    padding: 10px;
+    margin: 8px;
+  }
+  
+form h1{
+  margin: 8px;
+  font-size: 3rem;
+}
   
