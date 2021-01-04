@@ -51,5 +51,9 @@ h1{
     border-radius: 15px;
     transition: padding 0.5s, background 0.5s, color 0.5s;
   }
+  a
+  {
+    text-decoration: none; 
+  }
 
   
