@@ -11,3 +11,14 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
+function createRoom()
+{
+    
+    var roomName = document.getElementById("room").value;
+    var roomKey = document.getElementById("key").value;
+    
+    db.collection("rooms").doc(roomName).set(
+        {key:roomKey}
+    );
+    
+}
