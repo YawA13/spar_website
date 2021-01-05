@@ -84,12 +84,14 @@ function createRoom()
                     start:"player1",
                     last:""
                 }
-            );
+            )
+            .then(function()
+            {
+                localStorage.setItem("playerId","player1");  //saves which player the user is
+                localStorage.setItem("roomName",roomName);   //saves what room the user is going to be in
+                goToGame();
+            });
             
-            localStorage.setItem("playerId","player1");  //saves which player the user is
-            localStorage.setItem("roomName",roomName);   //saves what room the user is going to be in
-            goToGame();
-        
         }
 
      
