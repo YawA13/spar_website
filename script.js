@@ -41,7 +41,24 @@ function createDeck()
     shuffleArray(cards);
 }
 
-
+//checks that name and key inputs are not empty/whitespace, returns true if input is not empty/whitespace
+function checkInput(name,key)
+{
+    if (name.match(/^\s*$/))  //checks that roomane is not empty
+    {
+        window.alert("Room Name Can't Be Empty");
+        return false;
+    }
+    else if (key.match(/^\s*$/))  //check that room key is not empty
+    {
+         window.alert("Room Key Can't Be Empty");
+         return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 
 function createRoom()
 {
@@ -50,15 +67,7 @@ function createRoom()
     var roomKey = document.getElementById("key").value;
     createDeck();
 
-        if (roomName.match(/^\s*$/))  //checks that roomane is not empty
-        {
-            window.alert("Room Name Can't Be Empty");
-        }
-        else if (roomKey.match(/^\s*$/))  //check that room key is not empty
-        {
-            window.alert("Room Key Can't Be Empty");
-        }
-        else
+        if (checkInput(roomName,roomKey)) 
         {
             //creates new firestore doc based on room name inputed and fields of various info
             db.collection("rooms").doc(roomName).set(
@@ -76,12 +85,53 @@ function createRoom()
                     last:""
                 }
             );
+            
+            localStorage.setItem("playerId","player1");  //saves which player the user is
+            localStorage.setItem("roomName",roomName);   //saves what room the user is going to be in
+            goToGame();
+        
         }
 
-     goToGame();
+     
 }
 
 function goToGame()
 {
     window.location = 'game.html';
+}
+
+function joinRoom()
+{
+    var roomName = document.getElementById("room").value;
+    var roomKey = document.getElementById("key").value;
+
+    if (checkInput(roomName,roomKey)) 
+    {
+        db.collection("rooms").doc(roomName).get().then(function(doc)
+        {
+            if (doc.exists) //room name is found
+            {
+                var rightKey = doc.get("key");
+                
+                if (rightKey == roomKey) //room key is found
+                {
+                    localStorage.setItem("playerId","player2"); //saves which player the user is
+                    localStorage.setItem("roomName",roomName);  //saves what room the user is going to be in
+                    goToGame();
+                }
+                else //no room key is found
+                {
+                    window.alert("The Key For the room is incorrect");
+                }
+
+            }
+            else //no room name is found
+            {
+                window.alert("No room of such name was found");
+            }
+        });
+    }
+    
+
+
 }
