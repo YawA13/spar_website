@@ -1,3 +1,9 @@
+body{
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
 h1{
     font-family: 'Century Gothic',sans-serif;
     font-size: 4rem;
@@ -6,9 +12,14 @@ h1{
     color: white;
 }
 
+h2{
+  color: #ffffff;
+  font-family: 'Century Gothic',sans-serif;
+}
+
 .landing{
     background-color: rgba(0, 0, 0, 0.9);
-    height: 100vh;
+    height: 100%;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -94,4 +105,86 @@ form h1{
   margin: 8px;
   font-size: 3rem;
 }
+
+.gameBoard {
+  background-color: rgba(0, 0, 0, 0.9);
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   
+}
+
+.row{
+  display: flex;
+  flex-direction:row;
+  height: 32%;
+  width: 100%;
+  overflow: hidden;
+  align-items: center;
+  flex-flow: nowrap;
+  
+}
+
+#top{
+  justify-content: space-between;
+  align-items: flex-start;
+}  
+#middle{
+  justify-content:center;
+  
+}  
+#bottom{
+  justify-content:space-evenly;
+}  
+img{
+  
+  height: auto;
+  width: auto;
+  max-width: 18vw;
+  max-height: 100%;
+  opacity: 0.3;
+}
+.textBox {
+  background: #ffffff;
+  width: auto;
+  height: auto;
+  max-width: 18vw;
+  text-align: center;
+  margin-left: 50px;
+  opacity: 0.3;
+  
+}
+.textBox h1 {
+  color: #000000;
+  font-size: 2rem;
+}
+
+#waitMsg{
+  margin-right: 50px;
+  margin-left: 0px;
+  opacity: 1;
+}
+
+.stackInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.stackInfo img{
+  max-height: 24vh;
+  padding-top: 10px;
+}
+
+.stackInfo h1{
+  color: #ffffff;
+  margin: 0;
+}

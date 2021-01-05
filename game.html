@@ -7,9 +7,54 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://kit.fontawesome.com/860f9489ad.js" crossorigin="anonymous"></script>
+        
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
         <script src="game script.js"></script>
 
     </head>
     <body>
+        <section class="gameBoard">
+            <section class = "row" id="top">
+                <div class="stackInfo">
+                    <h1>0</h1>
+                    <h2>Score</h2>
+                </div>
+                <div class="stackInfo">
+                    <img src="images/p2.jpg" alt="">
+                    <h2>Player 2</h2>
+                </div>
+                <div class="stackInfo">
+                    <img src="images/blank.png" alt="">
+                    <h2>Power Suit</h2>
+                </div>
+            </section>
+
+            <section class="row" id="middle">
+                <div class="textBox" id="waitMsg">
+                    <h1>Waiting For Other Player</h1>
+                    <h1>Please Wait</h1>
+                </div>
+                
+                <img src="images/blank.png" id="currImg">
+                
+                <div class="textBox">
+                    <h1>Number of cards left</h1>
+                    <h1>51</h1>
+               </div>
+                
+            </section>
+
+            <section class ="row" id="bottom">  
+                
+                <img src="images/blank.png" id="img1">
+                <img src="images/blank.png" id="img2">
+                <img src="images/blank.png" id="img3">
+                <img src="images/blank.png" id="img4">
+                <img src="images/blank.png" id="img5">
+                
+            </section>
+        </section>
     </body>
 </html>
