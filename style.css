@@ -148,6 +148,7 @@ img{
   max-width: 18vw;
   max-height: 100%;
   opacity: 0.3;
+  pointer-events: none;
 }
 .textBox {
   background: #ffffff;
