@@ -74,15 +74,17 @@ function createRoom()
                 {
                     key:roomKey,
                     card:cards,
-                    highNumber:"0",
+                    highNumber:0,
                     highPlayer:"",
                     highSuit:"",
-                    player1card:"0",
-                    player2card:"0",
+                    player1card:0,
+                    player2card:0,
                     currentCard:"",
                     ready:false,
                     start:"player1",
-                    last:""
+                    last:"player2",
+                    round:"new",
+                    winner:"none"
                 }
             )
             .then(function()
