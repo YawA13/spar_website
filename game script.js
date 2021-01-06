@@ -17,10 +17,18 @@ var roomName = localStorage.getItem("roomName");
 var docRef = db.collection("rooms").doc(roomName);
 var ready = false;
 
+//runs anytime the data is changed in firestore
 docRef.onSnapshot(function(doc) 
 {
+    //updates ready to true if player2 has joined
+    if (player == "player2")
+    {
+        docRef.update({ready:true});
+    }
     ready = doc.get("ready");
-    if (ready)
+    
+    //when player 2 joins, sets the game board for both players
+    if (ready)             
     {
         startGameBoard();
     }
@@ -41,6 +49,6 @@ function startGameBoard()
     document.getElementById("currImg").style.opacity="1";
     document.getElementById("cardMsg").style.opacity="1";
 
-    //make the wasit messgae be hidden
-    document.getElementById("waitMsg").style.visibility = "hidden";
+    //make the wait messgae be hidden
+    document.getElementById("waitMsg").style.visibility = "hidden"; 
 }
