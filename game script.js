@@ -24,10 +24,15 @@ var powerSuit;
 //runs anytime the data is changed in firestore
 docRef.onSnapshot(function(doc) 
 {
-    //updates ready to true if player2 has joined
-    if (player == "player2")
+    //runs for only player2 when they first join the game
+    if ( (player == "player2") && firstTime)
     {
+         //updates ready to true if player2 has joined
         docRef.update({ready:true});
+
+        //sets logo and logo title to player1 logo anad player 1 logo title
+        document.getElementById("logo").src="images/p1.jpg";
+        document.getElementById("logoTitle").textContent="Player 1";
     }
     ready = doc.get("ready");
     
@@ -37,6 +42,8 @@ docRef.onSnapshot(function(doc)
         startGameBoard();
         deck = doc.get("card"); //randomised deck from firestore
         setCards();
+        console.log(deck);
+        console.log(playerCards);
     }
 
 });
