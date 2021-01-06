@@ -87,8 +87,8 @@ function createRoom()
             )
             .then(function()
             {
-                localStorage.setItem("playerId","player1");  //saves which player the user is
-                localStorage.setItem("roomName",roomName);   //saves what room the user is going to be in
+                sessionStorage.setItem("playerId","player1");  //saves which player the user is
+                sessionStorage.setItem("roomName",roomName);   //saves what room the user is going to be in
                 goToGame();
             });
             
@@ -117,8 +117,9 @@ function joinRoom()
                 
                 if (rightKey == roomKey) //room key is found
                 {
-                    localStorage.setItem("playerId","player2"); //saves which player the user is
-                    localStorage.setItem("roomName",roomName);  //saves what room the user is going to be in
+                    sessionStorage.setItem("playerId","player2"); //saves which player the user is
+                    sessionStorage.setItem("roomName",roomName);  //saves what room the user is going to be in
+                    
                     goToGame();
                 }
                 else //no room key is found
