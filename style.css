@@ -151,7 +151,7 @@ img{
   pointer-events: none;
 }
 .textBox {
-  background: #ffffff;
+  background: transparent;
   width: auto;
   height: auto;
   max-width: 18vw;
@@ -161,7 +161,7 @@ img{
   
 }
 .textBox h1 {
-  color: #000000;
+  color: #ffffff;
   font-size: 2rem;
 }
 
