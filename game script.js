@@ -20,7 +20,17 @@ var deck;
 var firstTime = true;   //variable that function only occurs once
 var playerCards=[]; //array of current cards the player has
 var powerSuit;
+var cardSuit;
+var cardValue;
+var cardName;
 var otherPlayer;
+var emptyCard = [];
+var startVar;
+var lastVar;
+var highSuitVar;
+var highNumVar;
+var player1cardVar;
+var player2cardVar;
 
 //runs anytime the data is changed in firestore
 docRef.onSnapshot(function(doc) 
@@ -80,9 +90,7 @@ function startGameBoard()
 
 function setCards()
 {
-    var cardSuit;
-    var cardValue;
-    var cardName;
+    
     for (var i =0;i<=4;i++)
     {
         if (player=="player1")
@@ -116,4 +124,67 @@ function setCards()
 
     //remove first 11 cards (cards in each playerCards and powerSuit card) from deck
     deck.splice(0,11);
+}
+
+//function when a card is clicked, param pos is the postion of the image
+function cardClick(pos)
+{
+    cardSuit = playerCards[pos].suit;
+    cardValue = playerCards[pos].value;
+    var dataUpdate; //object of fields that willl be updated in firestore
+
+    if (startVar == player)
+    {
+        dataUpdate = {
+            last:otherPlayer,
+            start:"",
+            highPlayer:player,
+            highSuit:cardSuit,
+            highNumber:cardValue
+        };
+    }
+    else if (lastVar == player)
+    {
+        dataUpdate = {last:""};
+
+        //true if both cards are same suit and the player card value is greater than other player
+        var condition1 = (highSuitVar == cardSuit) && (cardValue>highNumVar);
+
+        //true if card clicked suit is the same as power suit and the other card is not pat of the power suit
+        var condition2 = (cardSuit == powerSuit) && !(highSuitVar == powerSuit);
+
+        
+        if (condition1 || condition2)   //runs if last player won/played a higher card
+        {
+            Object.assign(dataUpdate,addData(player));
+        }
+        else    //runs if start player won/played a higher card
+        {
+            Object.assign(dataUpdate,addData(otherPlayer));
+        }
+    }
+    
+    //card clicked becomes current card in firestore  
+    dataUpdate.currentCard = cardSuit+cardValue;
+
+    //card clciked becomes "unavailable" to user
+    playerCards[pos]="";
+    document.getElementById("img"+pos).style.opacity="0.3";
+    document.getElementById("img"+pos).style.pointerEvents="none";
+
+    //add postion of card (pos) unclicked into array
+    emptyCard.unshift(pos);
+
+    //update fields all at once
+    docRef.update(dataUpdate);
+}
+
+function addData(playerId)
+{
+    return ({
+        start:playerId,
+        highPlayer:playerId,
+        round:"end",
+        [playerId+"card"]: window[playerId+"cardVar"]+2
+    });
 }
