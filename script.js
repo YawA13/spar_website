@@ -79,10 +79,10 @@ function createRoom()
                     highSuit:"",
                     player1card:0,
                     player2card:0,
-                    currentCard:"",
+                    currentCard:"images/blank.png",
                     ready:false,
                     start:"player1",
-                    last:"player2",
+                    last:"",
                     round:"new",
                     winner:"none"
                 }

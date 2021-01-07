@@ -20,6 +20,7 @@ var deck;
 var firstTime = true;   //variable that function only occurs once
 var playerCards=[]; //array of current cards the player has
 var powerSuit;
+var otherPlayer;
 
 //runs anytime the data is changed in firestore
 docRef.onSnapshot(function(doc) 
@@ -66,6 +67,15 @@ function startGameBoard()
     //make the wait messgae be hidden
     document.getElementById("waitMsg").style.visibility = "hidden"; 
     firstTime = false;
+
+    if (player == "player1")
+    {
+        otherPlayer = "player2";
+    }
+    else
+    {
+        otherPlayer = "player1";
+    }
 }
 
 function setCards()
