@@ -39,19 +39,9 @@ var winnerVar;
 //runs anytime the data is changed in firestore
 docRef.onSnapshot(function(doc) 
 {
-    //runs for only player2 when they first join the game
-    if ( (player == "player2") && firstTime)
-    {
-         //updates ready to true if player2 has joined
-        docRef.update({ready:true});
-
-        //sets logo and logo title to player1 logo anad player 1 logo title
-        document.getElementById("logo").src="images/p1.jpg";
-        document.getElementById("logoTitle").textContent="Player 1";
-    }
+    setForPlayer2();
     ready = doc.get("ready");
     
-   
     if (ready)             
     {
          //when player 2 joins, sets the game board for both players (only one time)
@@ -92,6 +82,22 @@ docRef.onSnapshot(function(doc)
     }
 
 });
+
+//function to load logo and logo title for player2 and tell firestore the game is ready
+function setForPlayer2()
+{
+    //runs for only player2 when they first join the game
+    if ( (player == "player2") && firstTime)
+    {
+        //sets logo and logo title to player1 logo anad player 1 logo title
+        document.getElementById("logo").src="images/p1.jpg";
+        document.getElementById("logoTitle").textContent="Player 1";
+
+        //updates ready to true if player2 has joined
+        docRef.update({ready:true});
+    }
+}
+
 
 function startGameBoard()
 {
