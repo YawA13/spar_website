@@ -24,14 +24,17 @@ var cardSuit;
 var cardValue;
 var cardName;
 var otherPlayer;
-var emptyCard = [];
-var startVar = "player1";
+var emptyCard = []; //array of postions of empty cards
+var startVar;
 var lastVar;
 var highSuitVar;
-var highNumVar;
+var highNumberVar;
+var highPlayerVar;
 var player1cardVar;
 var player2cardVar;
 var currentCardVar;
+var roundVar;
+var winnerVar;
 
 //runs anytime the data is changed in firestore
 docRef.onSnapshot(function(doc) 
@@ -59,8 +62,19 @@ docRef.onSnapshot(function(doc)
             setCards();
         }
         
-        //set current card images from firestore
+        //retrive all the fields from firestore  
+        startVar = doc.get("start");
+        lastVar = doc.get("last");
+        highSuitVar = doc.get("highSuit");
+        highNumberVar = doc.get("highNumber");
+        highPlayerVar = doc.get("highPlayer");
+        player1cardVar = doc.get("player1card");
+        player2cardVar = doc.get("player2card");
         currentCardVar = doc.get("currentCard");
+        roundVar = doc.get("round");
+        winnerVar = doc.get("winner");
+
+        //set current card image from firestore current card field
         document.getElementById("currImg").src = currentCardVar;
 
         if ((startVar==player)||(lastVar==player))
@@ -167,7 +181,7 @@ function cardClick(pos)
         dataUpdate = {last:""};
 
         //true if both cards are same suit and the player card value is greater than other player
-        var condition1 = (highSuitVar == cardSuit) && (cardValue>highNumVar);
+        var condition1 = (highSuitVar == cardSuit) && (cardValue>highNumberVar);
 
         //true if card clicked suit is the same as power suit and the other card is not pat of the power suit
         var condition2 = (cardSuit == powerSuit) && !(highSuitVar == powerSuit);
