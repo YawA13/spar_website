@@ -64,6 +64,9 @@ docRef.onSnapshot(function(doc)
         roundVar = doc.get("round");
         winnerVar = doc.get("winner");
 
+        //call winner message if there is winner
+        winAlert();
+
         //set current card image from firestore current card field
         document.getElementById("currImg").src = currentCardVar;
 
@@ -72,11 +75,11 @@ docRef.onSnapshot(function(doc)
 
         if ((startVar==player)||(lastVar==player))
         {
-            yourTurn("Your Turn To Play","1","auto");
+            setMsg("Your Turn To Play","1","auto");
         }
         else
         {
-            yourTurn("Not Your Turn to Play","0.3","none");
+            setMsg("Not Your Turn to Play","0.3","none");
         }
         
         //call roundEnd() method
@@ -237,7 +240,7 @@ function addData(playerId)
 }
 
 //function that sets wait message and turn on or off each card image
-function yourTurn(msg,opacity,clickable)
+function setMsg(msg,opacity,clickable)
 {
     //set waitmsg text to msg paramter
     document.getElementById("waitMsg").getElementsByTagName("h1")[0].innerText = msg;
@@ -304,5 +307,17 @@ function roundEnd()
 
         //change the text of how many cards are available
         document.getElementById("numCard").textContent= deck.length;
+    }
+}
+
+function winAlert()
+{
+    if (winnerVar == player)
+    {
+        setMsg("WINNER","1","none");
+    }
+    else if (winnerVar != "none")
+    {
+        setMsg("LOSER","1","none");
     }
 }
