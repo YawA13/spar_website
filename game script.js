@@ -79,6 +79,8 @@ docRef.onSnapshot(function(doc)
             yourTurn("Not Your Turn to Play","0.3","none");
         }
         
+        //call roundEnd() method
+        roundEnd();
     }
 
 });
@@ -97,7 +99,6 @@ function setForPlayer2()
         docRef.update({ready:true});
     }
 }
-
 
 function startGameBoard()
 {
@@ -250,5 +251,47 @@ function yourTurn(msg,opacity,clickable)
             document.getElementById("img"+i).style.pointerEvents=clickable;
         }
         
+    }
+}
+
+//function to apply changes to firestore when round ends including adding new cards into an empty spot from deck and reducuing the deck number
+function roundEnd()
+{
+    //runs when the round ends 
+    if (roundVar == "end")
+    {
+        if (highPlayerVar==player)
+        {
+            //pos of an empty card
+            var pos = emptyCard[0];
+
+            //take first card from deck and set into player card at pos of last empty card
+            playerCards[pos] = deck[0];
+
+            cardSuit = playerCards[pos].suit;
+            cardValue = playerCards[pos].value;
+            cardName="images/"+cardSuit+cardValue+".jpg";
+            
+            //"enable" card image at the new position 
+            document.getElementById("img"+pos).style.opacity="1";
+            document.getElementById("img"+pos).style.pointerEvents="auto";
+            document.getElementById("img"+pos).src=cardName;
+            
+            //remove the last position that was empty
+            emptyCard.shift();
+
+            //update firestore
+            docRef.update(
+            {
+                currentCard:"images/blank.png",
+                round:"new"
+            });
+        }
+
+        //remove first card of the deck
+        deck.shift();
+
+        //change the text of how many cards are available
+        document.getElementById("numCard").textContent= deck.length;
     }
 }
