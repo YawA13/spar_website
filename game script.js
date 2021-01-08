@@ -264,32 +264,40 @@ function roundEnd()
     //runs when the round ends 
     if (roundVar == "end")
     {
-        if (highPlayerVar==player)
+        //hides wait msg until roundEnd is evaluated
+        document.getElementById("waitMsg").style.visibility = "hidden";
+
+        //evaluates  function after 1 second so both oplayer can view the last player clicked card
+        setTimeout(function()
         {
-            //pos of an empty card
-            var pos = emptyCard[0];
 
-            //take first card from deck and set into player card at pos of last empty card
-            playerCards[pos] = deck[0];
-
-            //get card info for new card from deck
-            getCardInfo(playerCards,pos);
-            
-            //"enable" card image at the new position 
-            document.getElementById("img"+pos).style.opacity="1";
-            document.getElementById("img"+pos).style.pointerEvents="auto";
-            document.getElementById("img"+pos).src=cardName;
-            
-            //remove the last position that was empty
-            emptyCard.shift();
-
-            //update firestore
-            docRef.update(
+            if (highPlayerVar==player)
             {
-                currentCard:"images/blank.png",
-                round:"new"
-            });
-        }
+                //pos of an empty card
+                var pos = emptyCard[0];
+
+                //take first card from deck and set into player card at pos of last empty card
+                playerCards[pos] = deck[0];
+
+                //get card info for new card from deck
+                getCardInfo(playerCards,pos);
+                
+                //"enable" card image at the new position 
+                document.getElementById("img"+pos).style.opacity="1";
+                document.getElementById("img"+pos).style.pointerEvents="auto";
+                document.getElementById("img"+pos).src=cardName;
+                
+                //remove the last position that was empty
+                emptyCard.shift();
+
+                //update firestore
+                docRef.update(
+                {
+                    currentCard:"images/blank.png",
+                    round:"new"
+                });
+            }
+        }, 1000);
 
         //remove first card of the deck
         deck.shift();
