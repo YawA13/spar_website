@@ -234,7 +234,12 @@ function yourTurn(msg,opacity,clickable)
     //set each image either clickable and 100% opaque or not clickable and 0.3 opaque
     for (var i = 0;i<=4;i++)
     {
-        document.getElementById("img"+i).style.opacity=opacity;
-        document.getElementById("img"+i).style.pointerEvents=clickable;
+        //sets only for positions not in emptyCard array
+        if (!emptyCard.includes(i))
+        {
+            document.getElementById("img"+i).style.opacity=opacity;
+            document.getElementById("img"+i).style.pointerEvents=clickable;
+        }
+        
     }
 }
