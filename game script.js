@@ -129,6 +129,14 @@ function startGameBoard()
     }
 }
 
+//get card suit, card value and card name from array of cards and at index
+function getCardInfo(cardArray,index)
+{
+    cardSuit = cardArray[index].suit;
+    cardValue = cardArray[index].value;
+    cardName="images/"+cardSuit+cardValue+".jpg";
+}
+
 function setCards()
 {
     
@@ -145,9 +153,8 @@ function setCards()
             playerCards[i]=deck[i+5];
         }
         
-        cardSuit = playerCards[i].suit;
-        cardValue = playerCards[i].value;
-        cardName="images/"+cardSuit+cardValue+".jpg";
+        //get card info for all player cards
+        getCardInfo(playerCards,i);
 
         //sets each card img on html to its appropiate cardName from playerCards; 
         document.getElementById("img"+i).src=cardName;
@@ -155,9 +162,7 @@ function setCards()
     }
 
     //gets suit and value from deck[10] to become power suit in game
-    cardSuit = deck[10].suit;
-    cardValue = deck[10].value;
-    cardName="images/"+cardSuit+cardValue+".jpg";
+    getCardInfo(deck,10);
 
     //set pSuit image to the power suit above
     document.getElementById("pSuit").src=cardName;
@@ -170,9 +175,8 @@ function setCards()
 //function when a card is clicked, param pos is the postion of the image
 function cardClick(pos)
 {
-    cardSuit = playerCards[pos].suit;
-    cardValue = playerCards[pos].value;
-    cardName="images/"+cardSuit+cardValue+".jpg";
+    //get card info for currently clicked card
+    getCardInfo(playerCards,pos);
 
     var dataUpdate = {}; //object of fields that willl be updated in firestore
 
@@ -268,9 +272,8 @@ function roundEnd()
             //take first card from deck and set into player card at pos of last empty card
             playerCards[pos] = deck[0];
 
-            cardSuit = playerCards[pos].suit;
-            cardValue = playerCards[pos].value;
-            cardName="images/"+cardSuit+cardValue+".jpg";
+            //get card info for new card from deck
+            getCardInfo(playerCards,pos);
             
             //"enable" card image at the new position 
             document.getElementById("img"+pos).style.opacity="1";
