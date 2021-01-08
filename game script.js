@@ -25,12 +25,13 @@ var cardValue;
 var cardName;
 var otherPlayer;
 var emptyCard = [];
-var startVar;
+var startVar = "player1";
 var lastVar;
 var highSuitVar;
 var highNumVar;
 var player1cardVar;
 var player2cardVar;
+var currentCardVar;
 
 //runs anytime the data is changed in firestore
 docRef.onSnapshot(function(doc) 
@@ -47,14 +48,30 @@ docRef.onSnapshot(function(doc)
     }
     ready = doc.get("ready");
     
-    //when player 2 joins, sets the game board for both players (only one time)
-    if (ready&&firstTime)             
+   
+    if (ready)             
     {
-        startGameBoard();
-        deck = doc.get("card"); //randomised deck from firestore
-        setCards();
-        console.log(deck);
-        console.log(playerCards);
+         //when player 2 joins, sets the game board for both players (only one time)
+        if (firstTime)
+        {
+            startGameBoard();
+            deck = doc.get("card"); //randomised deck from firestore
+            setCards();
+        }
+        
+        //set current card images from firestore
+        currentCardVar = doc.get("currentCard");
+        document.getElementById("currImg").src = currentCardVar;
+
+        if ((startVar==player)||(lastVar==player))
+        {
+            yourTurn("Your Turn To Play","1","auto");
+        }
+        else
+        {
+            yourTurn("Not Your Turn to Play","0.3","none");
+        }
+        
     }
 
 });
@@ -131,7 +148,9 @@ function cardClick(pos)
 {
     cardSuit = playerCards[pos].suit;
     cardValue = playerCards[pos].value;
-    var dataUpdate; //object of fields that willl be updated in firestore
+    cardName="images/"+cardSuit+cardValue+".jpg";
+
+    var dataUpdate = {}; //object of fields that willl be updated in firestore
 
     if (startVar == player)
     {
@@ -165,7 +184,7 @@ function cardClick(pos)
     }
     
     //card clicked becomes current card in firestore  
-    dataUpdate.currentCard = cardSuit+cardValue;
+    dataUpdate["currentCard"] = cardName;
 
     //card clciked becomes "unavailable" to user
     playerCards[pos]="";
@@ -187,4 +206,21 @@ function addData(playerId)
         round:"end",
         [playerId+"card"]: window[playerId+"cardVar"]+2
     });
+}
+
+//function that sets wait message and turn on or off each card image
+function yourTurn(msg,opacity,clickable)
+{
+    //set waitmsg text to msg paramter
+    document.getElementById("waitMsg").getElementsByTagName("h1")[0].innerText = msg;
+
+    //set waitmsg visible to user
+    document.getElementById("waitMsg").style.visibility = "visible";
+    
+    //set each image either clickable and 100% opaque or not clickable and 0.3 opaque
+    for (var i = 0;i<=4;i++)
+    {
+        document.getElementById("img"+i).style.opacity=opacity;
+        document.getElementById("img"+i).style.pointerEvents=clickable;
+    }
 }
