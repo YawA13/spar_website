@@ -224,6 +224,7 @@ function cardClick(pos)
     playerCards[pos]="";
     document.getElementById("img"+pos).style.opacity="0.3";
     document.getElementById("img"+pos).style.pointerEvents="none";
+    document.getElementById("img"+pos).src="images/blank.png";
 
     //add postion of card (pos) unclicked into array
     emptyCard.unshift(pos);
