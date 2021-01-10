@@ -67,10 +67,18 @@ function createRoom()
     var roomKey = document.getElementById("key").value;
     createDeck();
 
-        if (checkInput(roomName,roomKey)) 
+    if (checkInput(roomName,roomKey)) 
+    {
+        db.collection("rooms").doc(roomName).get().then(function(doc)
         {
-            //creates new firestore doc based on room name inputed and fields of various info
-            db.collection("rooms").doc(roomName).set(
+            if (doc.exists)
+            {
+                window.alert("There is another room with that name, please choose something else");
+            }
+            else
+            {
+                    //creates new firestore doc based on room name inputed and fields of various info
+                db.collection("rooms").doc(roomName).set(
                 {
                     key:roomKey,
                     card:cards,
@@ -85,18 +93,16 @@ function createRoom()
                     last:"",
                     round:"new",
                     gameOver:false
-                }
-            )
-            .then(function()
-            {
-                sessionStorage.setItem("playerId","player1");  //saves which player the user is
-                sessionStorage.setItem("roomName",roomName);   //saves what room the user is going to be in
-                goToGame();
-            });
-            
-        }
-
-     
+                })
+                .then(function()
+                {
+                    sessionStorage.setItem("playerId","player1");  //saves which player the user is
+                    sessionStorage.setItem("roomName",roomName);   //saves what room the user is going to be in
+                    goToGame();
+                });
+            }
+        });
+    }
 }
 
 function goToGame()
@@ -136,7 +142,4 @@ function joinRoom()
             }
         });
     }
-    
-
-
 }
