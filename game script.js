@@ -34,7 +34,7 @@ var player1cardVar;
 var player2cardVar;
 var currentCardVar;
 var roundVar;
-var winnerVar;
+var gameOverVar;
 
 //runs anytime the data is changed in firestore
 docRef.onSnapshot(function(doc) 
@@ -62,28 +62,34 @@ docRef.onSnapshot(function(doc)
         player2cardVar = doc.get("player2card");
         currentCardVar = doc.get("currentCard");
         roundVar = doc.get("round");
-        winnerVar = doc.get("winner");
+        gameOverVar = doc.get("gameOver");
 
-        //call winner message if there is winner
-        winAlert();
+         //set current card image from firestore current card field
+         document.getElementById("currImg").src = currentCardVar;
 
-        //set current card image from firestore current card field
-        document.getElementById("currImg").src = currentCardVar;
+         //set score of the user based off data in firestore
+         document.getElementById("scoreNum").textContent=window[player+"cardVar"];
 
-        //set score of the user based off data in firestore
-        document.getElementById("scoreNum").textContent=window[player+"cardVar"];
-
-        if ((startVar==player)||(lastVar==player))
+        //checks if the game is over
+        if (gameOverVar)
         {
-            setMsg("Your Turn To Play","1","auto");
+            //determines the winner and sets the message to be shown to the user
+            winAlert(); 
         }
         else
         {
-            setMsg("Not Your Turn to Play","0.3","none");
+            if ((startVar==player)||(lastVar==player))
+            {
+                setMsg("Your Turn To Play","1","auto");
+            }
+            else
+            {
+                setMsg("Not Your Turn to Play","0.3","none");
+            }
+            
+            //call roundEnd() method
+            roundEnd();
         }
-        
-        //call roundEnd() method
-        roundEnd();
     }
 
 });
@@ -300,6 +306,15 @@ function roundEnd()
                     round:"new"
                 });
             }
+            //checks if there is no cards left for the user
+            if (emptyCard.length == 5)
+            {
+                docRef.update({
+                    gameOver:true,
+                    currentCard:"images/blank.png",
+                });
+            }
+        
         }, 1000);
 
         //remove first card of the deck
@@ -310,14 +325,16 @@ function roundEnd()
     }
 }
 
+//displays a winer message to the player who won and gives the loser, a loser message
 function winAlert()
 {
-    if (winnerVar == player)
+    //checks if user's score greater than other player
+    if (window[player+"cardVar"]>window[otherPlayer+"cardVar"])
     {
-        setMsg("WINNER","1","none");
+        setMsg("WINNER","0.3","none");
     }
-    else if (winnerVar != "none")
+    else if (window[otherPlayer+"cardVar"]>window[player+"cardVar"])
     {
-        setMsg("LOSER","1","none");
+        setMsg("LOSER","0.3","none");
     }
 }

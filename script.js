@@ -84,7 +84,7 @@ function createRoom()
                     start:"player1",
                     last:"",
                     round:"new",
-                    winner:"none"
+                    gameOver:false
                 }
             )
             .then(function()
