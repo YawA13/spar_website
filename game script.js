@@ -67,9 +67,6 @@ docRef.onSnapshot(function(doc)
          //set current card image from firestore current card field
          document.getElementById("currImg").src = currentCardVar;
 
-         //set score of the user based off data in firestore
-         document.getElementById("scoreNum").textContent=window[player+"cardVar"];
-
         //checks if the game is over
         if (gameOverVar)
         {
@@ -314,7 +311,10 @@ function roundEnd()
                     currentCard:"images/blank.png",
                 });
             }
-        
+
+            //set score of the user based off data in firestore
+            document.getElementById("scoreNum").textContent=window[player+"cardVar"];
+
         }, 1000);
 
         //remove first card of the deck
