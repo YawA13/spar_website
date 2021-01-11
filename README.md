@@ -50,7 +50,7 @@ Game Play
 
 ## Link To Website
 
-Link to [Website](https://github.com/YawA13)
+Link to [Website](https://yawa13.github.io/spar_website/)
 
 ## Built With
 - HTML
