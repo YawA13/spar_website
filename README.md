@@ -1,6 +1,6 @@
 # Spar Web Game
 
-Web game of the traditional ghanaian card game Spar based off my own family's rules. Online web based game that allows two players to play agaisnt each other in Spar in a realtime enviroment 
+Web game of the traditional ghanaian card game Spar based off my own family's rules. Online web based game that allows two players to play agaisnt each other in Spar in a realtime enviroment. 
 
 ## Features
 - Online implementation of Spar
