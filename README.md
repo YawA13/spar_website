@@ -51,7 +51,7 @@ Modern Web Browser:
 
 ## Link To Website
 
-Link to [Website](https://yawa13.github.io/spar_website/)
+[Url](https://yawa13.github.io/spar_website/)
 
 ## Built With
 - HTML
