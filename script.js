@@ -10,10 +10,9 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
+var cards = [];     //array of deck of cards
 
-var cards = [];
-
-//javascript implemtation of Durstenfeld shuffle
+//javascript implemtation of Durstenfeld shuffle to randomize array
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -44,12 +43,12 @@ function createDeck()
 //checks that name and key inputs are not empty/whitespace, returns true if input is not empty/whitespace
 function checkInput(name,key)
 {
-    if (name.match(/^\s*$/))  //checks that roomane is not empty
+    if (name.match(/^\s*$/))  //checks that roomane is not empty/contain only whitespace
     {
         window.alert("Room Name Can't Be Empty");
         return false;
     }
-    else if (key.match(/^\s*$/))  //check that room key is not empty
+    else if (key.match(/^\s*$/))  //check that room key is not empty/contain only whitespace
     {
          window.alert("Room Key Can't Be Empty");
          return false;
@@ -60,9 +59,9 @@ function checkInput(name,key)
     }
 }
 
+//function when submit button is clicked on in create.html 
 function createRoom()
 {
-    
     var roomName = document.getElementById("room").value;
     var roomKey = document.getElementById("key").value;
     createDeck();
@@ -71,13 +70,13 @@ function createRoom()
     {
         db.collection("rooms").doc(roomName).get().then(function(doc)
         {
-            if (doc.exists)
+            if (doc.exists)     //check if there is a room with the same name
             {
                 window.alert("There is another room with that name, please choose something else");
             }
             else
             {
-                    //creates new firestore doc based on room name inputed and fields of various info
+                //creates new firestore doc based on room name inputed and fields of various info
                 db.collection("rooms").doc(roomName).set(
                 {
                     key:roomKey,
@@ -98,18 +97,14 @@ function createRoom()
                 {
                     sessionStorage.setItem("playerId","player1");  //saves which player the user is
                     sessionStorage.setItem("roomName",roomName);   //saves what room the user is going to be in
-                    goToGame();
+                    window.location = 'game.html';                 //loads the page to game.html 
                 });
             }
         });
     }
 }
 
-function goToGame()
-{
-    window.location = 'game.html';
-}
-
+//function when submit button is clicked on in join.html 
 function joinRoom()
 {
     var roomName = document.getElementById("room").value;
@@ -119,7 +114,7 @@ function joinRoom()
     {
         db.collection("rooms").doc(roomName).get().then(function(doc)
         {
-            if (doc.exists) //room name is found
+            if (doc.exists) //checks to see that room name exists
             {
                 var rightKey = doc.get("key");
                 
@@ -127,14 +122,12 @@ function joinRoom()
                 {
                     sessionStorage.setItem("playerId","player2"); //saves which player the user is
                     sessionStorage.setItem("roomName",roomName);  //saves what room the user is going to be in
-                    
-                    goToGame();
+                    window.location = 'game.html';                 //loads the page to game.html 
                 }
                 else //no room key is found
                 {
                     window.alert("The Key For the room is incorrect");
                 }
-
             }
             else //no room name is found
             {

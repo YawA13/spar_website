@@ -9,22 +9,24 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
 
+//declare variables
+var db = firebase.firestore();
 var player = sessionStorage.getItem("playerId");
 var roomName = sessionStorage.getItem("roomName");
-
-var docRef = db.collection("rooms").doc(roomName);
-var ready = false;
-var deck;
+var docRef = db.collection("rooms").doc(roomName);  
 var firstTime = true;   //variable that function only occurs once
-var playerCards=[]; //array of current cards the player has
+var playerCards=[];     //array of current cards the player has
 var powerSuit;
 var cardSuit;
 var cardValue;
 var cardName;
-var otherPlayer;
-var emptyCard = []; //array of postions of empty cards
+var otherPlayer;        //variable of other user name (either player1 or player2)
+var emptyCard = [];     //array of postions of empty cards
+
+//variables of data from firestore
+var ready = false;      //variable to determine if the game is ready   
+var deck;    
 var startVar;
 var lastVar;
 var highSuitVar;
@@ -106,6 +108,7 @@ function setForPlayer2()
     }
 }
 
+//function to make html elements visible and set what player the user is
 function startGameBoard()
 {
     //for img1-img5 change all opaque to 1 and all of them are clickable
@@ -143,6 +146,7 @@ function getCardInfo(cardArray,index)
     cardName="images/"+cardSuit+cardValue+".jpg";
 }
 
+//function to set users cards, both array and images and powersuit and deck 
 function setCards()
 {
     
