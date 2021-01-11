@@ -19,7 +19,7 @@ Modern Web Browser:
 ## How To Play
 
 Create Game
-![create spar gif](https://user-images.githubusercontent.com/44479056/104159445-52529400-53bd-11eb-84b4-68a13691c22f.gif)
+- ![create spar gif](https://user-images.githubusercontent.com/44479056/104159445-52529400-53bd-11eb-84b4-68a13691c22f.gif)
 - Enter name of game room that you and the other player will be in
 - Enter key of game room that will be used as password for the other player to join the game
 - Submit typed in room and key 
@@ -28,7 +28,7 @@ Create Game
 - Considered as player 1 in the game
 
 Join Game
-![join spar gif](https://user-images.githubusercontent.com/44479056/104159474-5d0d2900-53bd-11eb-8ced-202730c545fd.gif)
+- ![join spar gif](https://user-images.githubusercontent.com/44479056/104159474-5d0d2900-53bd-11eb-8ced-202730c545fd.gif)
 - Enter name of game room the other player has told you 
 - Enter name of game key the other player has told you 
 - Submit typed in room and key
