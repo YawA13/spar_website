@@ -18,7 +18,7 @@ Modern Web Browser:
 
 ## How To Play
 
-Create Game
+### Create Game
 - ![create spar gif](https://user-images.githubusercontent.com/44479056/104159445-52529400-53bd-11eb-84b4-68a13691c22f.gif)
 - Enter name of game room that you and the other player will be in
 - Enter key of game room that will be used as password for the other player to join the game
@@ -27,14 +27,15 @@ Create Game
 - Room and key can not be empty/only whitespace
 - Considered as player 1 in the game
 
-Join Game
+### Join Game
 - ![join spar gif](https://user-images.githubusercontent.com/44479056/104159474-5d0d2900-53bd-11eb-8ced-202730c545fd.gif)
 - Enter name of game room the other player has told you 
 - Enter name of game key the other player has told you 
 - Submit typed in room and key
 - Considered as player 2 in the game
 
-Game Play
+### Game Play
+- ![gameplay spar gif](https://user-images.githubusercontent.com/44479056/104216048-8eaae200-5407-11eb-8b0f-26a077ef4f35.gif)
 - Game starts when both players are loaded into the game
 - 5 cards are given to both players and 1 card is considered the power suit and all 11 cards are removed from the deck
 - Player 1 starts the game and can choose any card and is displayed to both players
