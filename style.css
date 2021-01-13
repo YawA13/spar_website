@@ -40,9 +40,13 @@ h2{
     align-items: center;
     border: double;
     background: rgba(0, 0, 0, 0.3);
-    margin: 0 30px;
+    margin: 0 2vw;
     border-radius: 15px;
     transition: padding 0.5s, background 0.5s, color 0.5s;
+  }
+
+  .container h1{
+    font-size: 5vw;
   }
 
   .container:hover{
@@ -188,4 +192,12 @@ img{
 .stackInfo h1{
   color: #ffffff;
   margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .container
+  {
+    height: 35vw;
+    width: 40vw;
+  }
 }
